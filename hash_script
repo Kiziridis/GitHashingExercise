@@ -1,0 +1,29 @@
+#!/usr/bin/env fish
+
+function is_four_digit_integer
+    set input_str $argv[1]
+    
+    # Check if the input is a valid integer
+    if math "$input_str" > /dev/null 2>&1
+        # Check if the number has exactly 4 digits
+        if test $input_str -ge 1000 -a $input_str -le 9999
+            echo "$input_str is a 4-digit integer and its SHA-256 hash is stored in hash_output.txt."
+            return 0  # True
+        else
+            echo "$input_str is not a 4-digit integer."
+            return 1  # False
+        end
+    else
+        echo "$input_str is not a valid integer."
+        return 1  # False
+    end
+end
+
+# Example usage
+read -P "Enter a 4-digit integer: " user_input
+if is_four_digit_integer $user_input
+    # Generate SHA-256 hash of the entered integer
+    echo -n "$user_input" | sha256sum > hash_output.txt
+else
+    echo "Invalid input. Please enter a valid 4-digit integer."
+end
