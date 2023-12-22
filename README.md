@@ -1,2 +1,2 @@
 # GitHashingExercise
-OS_lab4
+This Project for OS Quiz-4 is about Git and Signals!  
